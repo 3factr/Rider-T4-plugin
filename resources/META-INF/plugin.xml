@@ -1,0 +1,61 @@
+<idea-plugin>
+    <id>be.3factr.t4processor</id>
+    <name>T4 Processor</name>
+    <version>0.6.0</version>
+    <vendor email="jens.schadron@3factr.be" url="http://www.3factr.be">3factr</vendor>
+
+    <description><![CDATA[
+        A simple plugin that enables T4 template processing.
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <p>
+            <b>v0.6.0</b><br />
+            - Fixed auto-refresh of solution analysis again
+            <br />
+            <b>v0.5.0</b><br />
+            - IntelliSense now auto-updates if the updated file is in the same folder as the .tt file.<br />
+            - Saves the files in the same folder as the .tt file before execution.<br />
+            <br />
+            <b>v0.4.0</b><br />
+            - Fixed crash after method signature changes in new Rider build. (again)<br />
+            <br />
+            <b>v0.3.1</b><br />
+            - Fixed crash after method signature changes in new Rider build.<br />
+            <br />
+            <b>v0.3.0</b><br />
+            Initial release<br />
+            Plugin is entirely rewritten in Kotlin.
+        </p>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="191.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.rider</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <applicationConfigurable
+                groupId="tools"
+                id="preferences.T4Processor"
+                displayName="T4 Processor"
+                instance="be.x3factr.t4processor.settings.T4Configurable"/>
+
+        <applicationService
+                serviceImplementation="be.x3factr.t4processor.settings.T4Configuration"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="be.x3factr.t4processor.actions.T4Processor" class="be.x3factr.t4processor.actions.T4Processor" text="Process T4 Template"
+                description="Processes a T4 file template.">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="SolutionExplorerPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+
+</idea-plugin>
